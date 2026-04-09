@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rosa Caveira - Justiça e Transformação</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/Al%C3%AA%20(3)%20(3)%20(1).png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        :root {
+            --preto: #0a0a0a;
+            --vermelho-sangue: #8b0000;
+            --vermelho-vivo: #dc143c;
+            --roxo-profundo: #4b0082;
+            --roxo-escuro: #2d004d;
+            --roxo-claro: #9370db;
+            --dourado: #ffd700;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--preto) 0%, var(--roxo-escuro) 50%, var(--vermelho-sangue) 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Animação de fundo pulsante */
+        @keyframes pulse-bg {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .bg-pulse {
+            animation: pulse-bg 5s ease-in-out infinite;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(75,0,130,0.8) 100%);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-bottom: 3px solid var(--vermelho-vivo);
+            box-shadow: 0 0 30px rgba(139,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '☠️🌹';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.08;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 25s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--dourado);
+            text-shadow: 0 0 20px var(--vermelho-vivo), 0 0 40px var(--roxo-claro);
+            margin-bottom: 0.3rem;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: var(--roxo-claro);
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0.5rem;
+        }
+
+        /* Seções Accordion */
+        .accordion {
+            margin: 0.8rem 0.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .accordion-header {
+            background: linear-gradient(90deg, var(--roxo-profundo) 0%, var(--vermelho-sangue) 100%);
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1.1rem;
+            font-weight: bold;
+            min-height: 55px;
+        }
+
+        .accordion-header:active {
+            transform: scale(0.99);
+            background: linear-gradient(90deg, var(--vermelho-vivo) 0%, var(--roxo-claro) 100%);
+        }
+
+        .accordion-header.active {
+            background: linear-gradient(90deg, var(--vermelho-vivo) 0%, var(--roxo-claro) 100%);
+            border-color: var(--dourado);
+            box-shadow: 0 0 20px rgba(255,215,0,0.4);
+        }
+
+        .accordion-icon {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.3s ease;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .accordion-content.active {
+            max-height: 3000px;
+            padding: 1rem 1.2rem;
+        }
+
+        .accordion-content p, .accordion-content ul {
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .accordion-content li {
+            padding: 0.4rem 0;
+            padding-left: 1.3rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .accordion-content li::before {
+            content: '🌹';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Galeria Horizontal Scrollável */
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding: 10px 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--vermelho-vivo) var(--roxo-escuro);
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: var(--roxo-escuro);
+            border-radius: 4px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: var(--vermelho-vivo);
+            border-radius: 4px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--dourado);
+        }
+
+        .gallery-item-h {
+            flex: 0 0 auto;
+            width: 280px;
+            height: 180px;
+            scroll-snap-align: start;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--roxo-profundo);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item-h:active {
+            transform: scale(0.98);
+            border-color: var(--dourado);
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+
+        .gallery-item-h img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item-h:active img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-h::after {
+            content: '🌹';
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .gallery-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--roxo-claro);
+            padding: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: linear-gradient(135deg, rgba(75,0,130,0.9) 0%, rgba(139,0,0,0.9) 100%);
+            border-radius: 15px;
+            padding: 1.5rem 1rem;
+            margin: 1.5rem 0.5rem;
+            border: 3px solid var(--dourado);
+            box-shadow: 0 0 30px rgba(255,215,0,0.3);
+        }
+
+        .quiz-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--dourado);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--vermelho-vivo);
+        }
+
+        .quiz-question {
+            background: rgba(0,0,0,0.7);
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--roxo-claro);
+        }
+
+        .question-text {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .quiz-option {
+            background: linear-gradient(90deg, var(--roxo-profundo) 0%, var(--preto) 100%);
+            border: 2px solid var(--roxo-escuro);
+            padding: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            line-height: 1.3;
+        }
+
+        .quiz-option:active {
+            transform: scale(0.98);
+        }
+
+        .quiz-option.correct {
+            background: linear-gradient(90deg, #228b22 0%, #006400 100%);
+            border-color: #32cd32;
+            box-shadow: 0 0 20px rgba(50,205,50,0.6);
+            animation: correct-pulse 0.5s ease;
+        }
+
+        .quiz-option.wrong {
+            background: linear-gradient(90deg, #8b0000 0%, #4a0000 100%);
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255,0,0,0.6);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correct-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .quiz-progress {
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            color: var(--dourado);
+        }
+
+        .quiz-result {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.8);
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .quiz-result.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Surpresa Final */
+        .surprise-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.97);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .surprise-section.show {
+            display: flex;
+            animation: surprise-appear 0.8s ease;
+        }
+
+        @keyframes surprise-appear {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .surprise-image {
+            max-width: 92%;
+            max-height: 55vh;
+            border-radius: 20px;
+            border: 4px solid var(--dourado);
+            box-shadow: 0 0 40px var(--vermelho-vivo), 0 0 80px var(--roxo-claro);
+            animation: image-pulse 2.5s ease-in-out infinite, float 7s ease-in-out infinite;
+        }
+
+        @keyframes image-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 40px var(--vermelho-vivo), 0 0 80px var(--roxo-claro);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 70px var(--vermelho-vivo), 0 0 120px var(--roxo-claro), 0 0 160px var(--dourado);
+                transform: scale(1.03);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.01); }
+        }
+
+        .falling-flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 1.8rem;
+            animation: fall linear infinite;
+            opacity: 0.85;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .surprise-text {
+            margin-top: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--dourado);
+            text-align: center;
+            text-shadow: 0 0 15px var(--vermelho-vivo);
+            animation: text-glow 2.5s ease-in-out infinite;
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+
+        @keyframes text-glow {
+            0%, 100% { text-shadow: 0 0 15px var(--vermelho-vivo), 0 0 30px var(--roxo-claro); }
+            50% { text-shadow: 0 0 25px var(--vermelho-vivo), 0 0 50px var(--roxo-claro), 0 0 70px var(--dourado); }
+        }
+
+        .close-surprise {
+            margin-top: 1.5rem;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(90deg, var(--vermelho-sangue) 0%, var(--roxo-profundo) 100%);
+            border: 2px solid var(--dourado);
+            color: var(--dourado);
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .close-surprise:active {
+            transform: scale(0.96);
+            background: linear-gradient(90deg, var(--roxo-profundo) 0%, var(--vermelho-sangue) 100%);
+        }
+
+        /* Botões grandes para mobile */
+        .btn-large {
+            display: block;
+            width: 95%;
+            margin: 0.8rem auto;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--roxo-profundo) 0%, var(--vermelho-sangue) 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            min-height: 55px;
+        }
+
+        .btn-large:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .btn-gold {
+            background: linear-gradient(90deg, var(--dourado) 0%, #ffa500 100%);
+            color: var(--preto);
+        }
+
+        /* Info cards */
+        .info-card {
+            background: rgba(0,0,0,0.5);
+            border-left: 4px solid var(--vermelho-vivo);
+            padding: 0.9rem;
+            margin: 0.8rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .info-card h3 {
+            color: var(--roxo-claro);
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .info-card p, .info-card ul {
+            font-size: 0.9rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+
+        .info-card li {
+            padding: 0.2rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .info-card li::before {
+            content: '⚫';
+            position: absolute;
+            left: 0;
+            color: var(--vermelho-vivo);
+        }
+
+        .highlight {
+            color: var(--dourado);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: rgba(0,0,0,0.9);
+            border-top: 2px solid var(--roxo-profundo);
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Partículas */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            animation: particle-fade 1s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes particle-fade {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+            .accordion-header { font-size: 1rem; min-height: 50px; padding: 0.9rem 1rem; }
+            .gallery-item-h { width: 240px; height: 150px; }
+            .quiz-option { min-height: 50px; font-size: 0.85rem; padding: 0.8rem; }
+            .surprise-text { font-size: 1.4rem; }
+            .surprise-image { max-width: 95%; max-height: 50vh; }
+        }
+    </style>
+</head>
+<body class="bg-pulse">
+
+    <header>
+        <h1>🌹 ROSA CAVEIRA ☠️</h1>
+        <p class="subtitle">Justiça • Morte • Renascimento</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Introdução -->
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>Quem é Rosa Caveira?</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Rosa Caveira é uma entidade poderosa, ligada à <span class="highlight">justiça</span> e ao ciclo da vida e da morte. Seu nome evoca a imagem de uma caveira com uma rosa, simbolizando a beleza e a transitoriedade da existência.</p>
+                <p>Ela é invocada para questões de justiça, especialmente quando há injustiças a serem reparadas. Também é associada à <span class="highlight">transformação</span> e ao renascimento espiritual.</p>
+                <div class="info-card">
+                    <h3>⚠️ Aviso Importante</h3>
+                    <p>Sua energia é intensa e não deve ser invocada sem preparo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galeria Horizontal -->
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🖼️ Galeria Sagrada (Deslize ← →)</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content active">
+                <p class="gallery-hint">👆 Toque e deslize para ver todas as imagens</p>
+                <div class="gallery-scroll">
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(1).png" alt="Rosa Caveira 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(2).png" alt="Rosa Caveira 2" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(3).png" alt="Rosa Caveira 3" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(4).png" alt="Rosa Caveira 4" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(5).png" alt="Rosa Caveira 5" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(6).png" alt="Rosa Caveira 6" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(7).png" alt="Rosa Caveira 7" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(8).png" alt="Rosa Caveira 8" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(9).png" alt="Rosa Caveira 9" loading="lazy">
+                    </div>
+                    <div class="gallery-item-h" onclick="vibrate(40)">
+                        <img src="https://raw.githubusercontent.com/pombagiras/rosa-caveira-/refs/heads/main/Rosa%20Caveira%20(10).png" alt="Rosa Caveira 10" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Características -->
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>⚡ Características e Simbolismo</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="info-card">
+                    <h3>📅 Dia de Reverência</h3>
+                    <p><span class="highlight">Sábado</span></p>
+                </div>
+                <div class="info-card">
+                    <h3>🌙 Fase da Lua</h3>
+                    <p>Lua Nova (transformação) ou Lua Cheia (justiça)</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎨 Cores Sagradas</h3>
+                    <p>⚫ Preto • 🔴 Vermelho-Sangue • 🟣 Roxo</p>
+                </div>
+                <div class="info-card">
+                    <h3>♏ Signos Associados</h3>
+                    <p>Escorpião (morte e renascimento) • Plutão (transformação)</p>
+                </div>
+                <div class="info-card">
+                    <h3>🌹 Simbolismo</h3>
+                    <ul>
+                        <li><strong>Caveira:</strong> fim, lucidez, corte, justiça</li>
+                        <li><strong>Rosa:</strong> beleza, sedução, força feminina</li>
+                        <li><strong>Balança:</strong> justiça equilibrada</li>
+                        <li><strong>Foice:</strong> corte final que liberta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Oferendas -->
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span>🕯️ Oferendas e Locais</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="info-card">
+                    <h3>🎁 Oferendas Recomendadas</h3>
+                    <ul>
+                        <li>Velas pretas ou vermelho-escuras</li>
+                        <li>Rosas vermelhas e pretas</li>
+                        <li>Vinho tinto (verdade e lucidez)</li>
+                        <li>Ossos simbólicos (ciclo vida/morte)</li>
+                        <li>Moedas (justiça e troca justa)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>📍 Locais de Oferenda</h3>
+                    <ul>
+                        <li>Cemitérios (Calunga Pequena) — à noite</li>
+                        <li>Encruzilhadas escuras</li>
+                        <li>Portais de encerramento</li>
+                        <li>Em casa (com respeito e firmeza)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>🔮 Utensílios</h3>
+                    <p>Foice • Espelho Negro • Rosário de Ossos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quizSection">
+            <h2 class="quiz-title">☠️ Teste Seu Conhecimento 🌹</h2>
+            <div class="quiz-progress" id="quizProgress">Questão 1 de 10</div>
+            <div id="quizContainer"></div>
+            <div class="quiz-result" id="quizResult"></div>
+            <button class="btn-large btn-gold" id="startQuiz" onclick="startQuiz()">▶ Iniciar Quiz</button>
+        </div>
+
+        <!-- Botão Surpresa -->
+        <button class="btn-large" onclick="showSurprise()" style="background: linear-gradient(90deg, #ff00ff 0%, #8b0000 100%); margin: 1.5rem auto;">
+            🌹 Revelação Final 🌹
+        </button>
+
+    </div>
+
+    <!-- Surpresa Modal -->
+    <div class="surprise-section" id="surpriseSection">
+        <div class="falling-flowers" id="fallingFlowers"></div>
+        <img src="https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/rosa_caveira_1.png" alt="Rosa Caveira Revelação" class="surprise-image">
+        <div class="surprise-text">
+            "A verdade liberta<br>
+            A justiça prevalece<br>
+            🌹☠️"
+        </div>
+        <button class="close-surprise" onclick="closeSurprise()">✦ Fechar ✦</button>
+    </div>
+
+    <footer>
+        <p>🌹 Rosa Caveira — Justiça Profunda e Renascimento ☠️</p>
+        <p style="margin-top: 0.4rem; opacity: 0.85;">"Caminhe através do escuro com sua própria luz"</p>
+    </footer>
+
+    <script>
+        // Haptic Feedback
+        function vibrate(pattern) {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(pattern);
+            }
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+            
+            document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
+            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
+            
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+                vibrate(25);
+            }
+        }
+
+        // Quiz Data
+        const quizData = [
+            {
+                question: "Qual é a principal função espiritual atribuída à entidade Rosa Caveira?",
+                options: [
+                    "Ela atua como a Pombagira da justiça profunda, da morte simbólica e do renascimento.",
+                    "Ela é uma entidade de prosperidade financeira.",
+                    "Ela atua apenas em questões amorosas.",
+                    "Ela é uma entidade de proteção infantil."
+                ],
+                correct: 0
+            },
+            {
+                question: "No simbolismo de Rosa Caveira, o que a 'rosa' representa?",
+                options: [
+                    "Apenas decoração",
+                    "Representa a beleza, a sedução, a força feminina e o mistério.",
+                    "Representa fragilidade",
+                    "Representa apenas o amor romântico"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual é o significado simbólico da 'caveira' na manifestação desta entidade?",
+                options: [
+                    "Apenas morte física",
+                    "Medo e terror",
+                    "Simboliza o fim, a lucidez, o corte, a justiça e o destino inevitável.",
+                    "Doença e sofrimento"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual dia da semana é tradicionalmente associado a Rosa Caveira?",
+                options: [
+                    "Segunda-feira", "Quarta-feira", "Sexta-feira", "Sábado"
+                ],
+                correct: 3
+            },
+            {
+                question: "O que a cor preta comunica energeticamente no culto a Rosa Caveira?",
+                options: [
+                    "Tristeza e depressão",
+                    "Representa o silêncio da morte que ensina.",
+                    "Apenas luto",
+                    "Escuridão e maldade"
+                ],
+                correct: 1
+            },
+            {
+                question: "Complete: Rosa Caveira não salva o indivíduo, ela o _____.",
+                options: ["protege", "desperta", "esconde", "julga"],
+                correct: 1
+            },
+            {
+                question: "O que o símbolo da 'foice' representa na estética de Rosa Caveira?",
+                options: [
+                    "Agricultura", "Tempo",
+                    "Representa o corte final que liberta o indivíduo.",
+                    "Colheita financeira"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual é a função do 'espelho preto' entre os símbolos da entidade?",
+                options: [
+                    "Apenas decoração",
+                    "Promover o confronto direto e profundo com o próprio eu.",
+                    "Ver o futuro",
+                    "Proteção contra inveja"
+                ],
+                correct: 1
+            },
+            {
+                question: "Em quais situações as pessoas costumam procurar Rosa Caveira?",
+                options: [
+                    "Apenas para ganhar na loteria",
+                    "Quando houve injustiça, traição, desonra, abuso ou necessidade de recuperar a própria voz.",
+                    "Para arranjar emprego",
+                    "Para passar em provas"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual é a dualidade central que compõe o poder de Rosa Caveira?",
+                options: [
+                    "Bem e Mal", "Dia e Noite",
+                    "A união entre a rosa (beleza/feminilidade) e a caveira (morte/lucidez).",
+                    "Riqueza e Pobreza"
+                ],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function startQuiz() {
+            document.getElementById('startQuiz').style.display = 'none';
+            currentQuestion = 0;
+            score = 0;
+            showQuestion();
+            vibrate([50, 30, 50]);
+        }
+
+        function showQuestion() {
+            answered = false;
+            const container = document.getElementById('quizContainer');
+            const progress = document.getElementById('quizProgress');
+            const q = quizData[currentQuestion];
+            
+            progress.textContent = `Questão ${currentQuestion + 1} de ${quizData.length}`;
+            
+            let html = `<div class="quiz-question"><div class="question-text">${q.question}</div><div class="quiz-options">`;
+            
+            q.options.forEach((opt, idx) => {
+                html += `<div class="quiz-option" onclick="checkAnswer(this, ${idx})">${opt}</div>`;
+            });
+            
+            html += '</div></div>';
+            container.innerHTML = html;
+        }
+
+        function checkAnswer(element, selected) {
+            if (answered) return;
+            answered = true;
+            
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            const correct = quizData[currentQuestion].correct;
+            
+            if (selected === correct) {
+                element.classList.add('correct');
+                score++;
+                vibrate([100, 50, 100]);
+                createParticles(element);
+            } else {
+                element.classList.add('wrong');
+                options[correct].classList.add('correct');
+                vibrate([200, 50, 200]);
+            }
+            
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1400);
+        }
+
+        function showResult() {
+            const container = document.getElementById('quizContainer');
+            const result = document.getElementById('quizResult');
+            const percentage = (score / quizData.length) * 100;
+            
+            let message = '', color = '';
+            
+            if (percentage === 100) {
+                message = '🌹 PERFEITO! Você conhece profundamente Rosa Caveira! ☠️';
+                color = '#ffd700';
+                vibrate([100, 50, 100, 50, 100]);
+            } else if (percentage >= 70) {
+                message = '🌹 Excelente! Você tem grande conhecimento sobre a entidade!';
+                color = '#32cd32';
+                vibrate([100, 50, 100]);
+            } else if (percentage >= 50) {
+                message = '⚖️ Bom! Mas ainda há muito para aprender sobre Rosa Caveira.';
+                color = '#ffa500';
+                vibrate([100]);
+            } else {
+                message = '☠️ Continue estudando! Rosa Caveira exige conhecimento e respeito.';
+                color = '#dc143c';
+                vibrate([200, 50, 200]);
+            }
+            
+            result.innerHTML = `
+                <h3 style="color: ${color}; font-size: 1.3rem; margin-bottom: 0.8rem;">${message}</h3>
+                <p style="font-size: 1.1rem;">Você acertou <span style="color: var(--dourado); font-weight: bold;">${score}</span> de ${quizData.length} questões</p>
+                <button class="btn-large" onclick="startQuiz()" style="margin-top: 1rem;">🔄 Refazer Quiz</button>
+            `;
+            result.classList.add('show');
+        }
+
+        function createParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const colors = ['#ffd700', '#ff00ff', '#ff0000', '#9370db'];
+            
+            for (let i = 0; i < 12; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = rect.left + rect.width / 2 + 'px';
+                particle.style.top = rect.top + rect.height / 2 + 'px';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.setProperty('--tx', (Math.random() - 0.5) * 180 + 'px');
+                particle.style.setProperty('--ty', (Math.random() - 0.5) * 180 + 'px');
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        function showSurprise() {
+            const surprise = document.getElementById('surpriseSection');
+            const flowers = document.getElementById('fallingFlowers');
+            const flowerEmojis = ['🌹', '🥀', '🌸', '💀', '☠️', '✨'];
+            
+            // Criar flores caindo
+            for (let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower';
+                    flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                    flower.style.left = Math.random() * 100 + '%';
+                    flower.style.animationDuration = (Math.random() * 4 + 2) + 's';
+                    flower.style.animationDelay = Math.random() * 2 + 's';
+                    flower.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                    flowers.appendChild(flower);
+                    setTimeout(() => flower.remove(), 7000);
+                }, i * 80);
+            }
+            
+            surprise.classList.add('show');
+            vibrate([100, 50, 100, 50, 100, 50, 100]);
+            
+            // Efeito de cores pulsando
+            let pulseCount = 0;
+            const pulseInterval = setInterval(() => {
+                document.body.style.filter = `hue-rotate(${pulseCount * 25}deg) brightness(${1 + Math.sin(pulseCount * 0.5) * 0.25})`;
+                pulseCount++;
+                if (pulseCount > 24) {
+                    clearInterval(pulseInterval);
+                    document.body.style.filter = 'none';
+                }
+            }, 250);
+        }
+
+        function closeSurprise() {
+            document.getElementById('surpriseSection').classList.remove('show');
+            document.getElementById('fallingFlowers').innerHTML = '';
+            vibrate(100);
+        }
+
+        // Prevenir zoom em double-tap no mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Smooth scroll para gallery no mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.querySelector('.gallery-scroll');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            gallery.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - gallery.offsetLeft;
+                scrollLeft = gallery.scrollLeft;
+            });
+            gallery.addEventListener('mouseleave', () => isDown = false);
+            gallery.addEventListener('mouseup', () => isDown = false);
+            gallery.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - gallery.offsetLeft;
+                const walk = (x - startX) * 2;
+                gallery.scrollLeft = scrollLeft - walk;
+            });
+        });
+    </script>
+</body>
+</html>
