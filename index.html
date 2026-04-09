@@ -259,7 +259,7 @@
             font-style: italic;
         }
 
-        /* Modal Lightbox */
+        /* Modal Lightbox - CORREÇÕES MOBILE */
         .lightbox {
             display: none;
             position: fixed;
@@ -271,9 +271,11 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             opacity: 0;
             transition: opacity 0.3s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         .lightbox.show {
@@ -281,8 +283,19 @@
             opacity: 1;
         }
 
+        .lightbox-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 10px 100px;
+        }
+
         .lightbox-header {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -290,8 +303,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(180deg, rgba(75,0,130,0.9) 0%, transparent 100%);
-            z-index: 10;
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(75,0,130,0.8) 100%);
+            z-index: 3000;
+            border-bottom: 2px solid var(--vermelho-vivo);
         }
 
         .lightbox-counter {
@@ -314,6 +328,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 3001;
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
         }
 
         .lightbox-close:active {
@@ -323,12 +339,13 @@
 
         .lightbox-image-container {
             position: relative;
+            width: 100%;
             max-width: 95%;
-            max-height: 75vh;
             display: flex;
             justify-content: center;
             align-items: center;
             animation: zoomIn 0.4s ease;
+            margin: 0 auto;
         }
 
         @keyframes zoomIn {
@@ -344,7 +361,7 @@
 
         .lightbox-image {
             max-width: 100%;
-            max-height: 75vh;
+            max-height: 70vh;
             object-fit: contain;
             border-radius: 12px;
             border: 4px solid var(--roxo-claro);
@@ -362,7 +379,7 @@
         }
 
         .lightbox-nav {
-            position: absolute;
+            position: fixed;
             top: 50%;
             transform: translateY(-50%);
             background: linear-gradient(90deg, var(--roxo-profundo) 0%, var(--vermelho-sangue) 100%);
@@ -377,7 +394,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 3000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
         .lightbox-nav:active {
@@ -394,24 +412,29 @@
         }
 
         .lightbox-caption {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 2rem 1rem 1.5rem;
-            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+            padding: 1.5rem 1rem 2rem;
+            background: linear-gradient(0deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.8) 70%, transparent 100%);
             text-align: center;
             color: var(--roxo-claro);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-style: italic;
+            z-index: 3000;
+            border-top: 2px solid var(--roxo-profundo);
         }
 
         .falling-flowers-lightbox {
-            position: absolute;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             overflow: hidden;
+            z-index: 2001;
         }
 
         .flower-lb {
@@ -740,18 +763,38 @@
             100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
         }
 
-        /* Responsividade */
+        /* Responsividade Mobile - CORREÇÕES */
         @media (max-width: 768px) {
+            .lightbox-wrapper {
+                padding: 70px 5px 90px;
+            }
+            
             .lightbox-nav {
                 width: 45px;
                 height: 45px;
                 font-size: 1.4rem;
             }
+            
             .lightbox-prev {
                 left: 8px;
             }
+            
             .lightbox-next {
                 right: 8px;
+            }
+            
+            .lightbox-image {
+                max-height: 60vh;
+            }
+            
+            .lightbox-close {
+                width: 42px;
+                height: 42px;
+                font-size: 1.3rem;
+            }
+            
+            .lightbox-counter {
+                font-size: 1rem;
             }
         }
 
@@ -762,9 +805,36 @@
             .quiz-option { min-height: 50px; font-size: 0.85rem; padding: 0.8rem; }
             .surprise-text { font-size: 1.4rem; }
             .surprise-image { max-width: 95%; max-height: 50vh; }
-            .lightbox-image { max-height: 65vh; }
-            .lightbox-counter { font-size: 0.95rem; }
-            .lightbox-caption { font-size: 0.95rem; padding: 1.5rem 0.5rem 1rem; }
+            
+            .lightbox-wrapper {
+                padding: 65px 5px 85px;
+            }
+            
+            .lightbox-image {
+                max-height: 55vh;
+                border-width: 3px;
+            }
+            
+            .lightbox-caption {
+                font-size: 0.85rem;
+                padding: 1rem 0.5rem 1.5rem;
+            }
+            
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-counter {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -927,13 +997,15 @@
             <span class="lightbox-counter" id="lightboxCounter">1 / 10</span>
             <button class="lightbox-close" onclick="closeLightbox()">✕</button>
         </div>
-        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">❮</button>
-        <div class="lightbox-image-container">
-            <img src="" alt="Rosa Caveira Ampliada" class="lightbox-image" id="lightboxImage">
+        <div class="lightbox-wrapper">
+            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1); event.stopPropagation();">❮</button>
+            <div class="lightbox-image-container" onclick="event.stopPropagation();">
+                <img src="" alt="Rosa Caveira Ampliada" class="lightbox-image" id="lightboxImage">
+            </div>
+            <button class="lightbox-nav lightbox-next" onclick="changeImage(1); event.stopPropagation();">❯</button>
         </div>
-        <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">❯</button>
         <div class="lightbox-caption">
-            🌹 Toque fora da imagem ou ❌ para fechar • Deslize ou use ❮ ❯ para navegar ☠️
+            🌹 Deslize ↑↓ para mover • Toque fora ou ❌ para fechar • ❮ ❯ para navegar ☠️
         </div>
     </div>
 
@@ -1009,6 +1081,9 @@
             
             // Criar flores caindo no lightbox
             createFallingFlowersLightbox();
+            
+            // Reset scroll position
+            lightbox.scrollTop = 0;
         }
 
         function closeLightbox() {
@@ -1044,7 +1119,7 @@
 
         function createFallingFlowersLightbox() {
             const container = document.getElementById('fallingFlowersLightbox');
-            const flowerEmojis = ['🌹', '🥀', '🌸', '💀', '☠️', '✨'];
+            const flowerEmojis = ['🌹', '🥀', '', '💀', '☠️', '✨'];
             
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
@@ -1063,7 +1138,7 @@
 
         // Fechar lightbox ao clicar fora da imagem
         document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('lightbox-image-container')) {
+            if (e.target === this) {
                 closeLightbox();
             }
         });
@@ -1077,28 +1152,43 @@
             }
         });
 
-        // Touch/Swipe para lightbox
+        // Touch/Swipe para lightbox - Vertical e Horizontal
+        let touchStartY = 0;
+        let touchEndY = 0;
         let touchStartX = 0;
         let touchEndX = 0;
+        const lightbox = document.getElementById('lightbox');
 
-        document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
             touchStartX = e.changedTouches[0].screenX;
         }, false);
 
-        document.getElementById('lightbox').addEventListener('touchend', function(e) {
+        lightbox.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, false);
 
         function handleSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            const diffX = touchStartX - touchEndX;
             
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    changeImage(1); // Swipe left - next
-                } else {
-                    changeImage(-1); // Swipe right - previous
+            // Verifica se o movimento vertical é maior que o horizontal
+            if (Math.abs(diffY) > Math.abs(diffX)) {
+                // Movimento vertical - permite scroll natural
+                if (Math.abs(diffY) > swipeThreshold) {
+                    // Scroll já está habilitado via CSS overflow-y: auto
+                }
+            } else {
+                // Movimento horizontal - navegação entre imagens
+                if (Math.abs(diffX) > swipeThreshold) {
+                    if (diffX > 0) {
+                        changeImage(1); // Swipe left - next
+                    } else {
+                        changeImage(-1); // Swipe right - previous
+                    }
                 }
             }
         }
@@ -1311,7 +1401,7 @@
         function showSurprise() {
             const surprise = document.getElementById('surpriseSection');
             const flowers = document.getElementById('fallingFlowers');
-            const flowerEmojis = ['🌹', '', '🌸', '💀', '☠️', '✨'];
+            const flowerEmojis = ['🌹', '🥀', '', '💀', '☠️', '✨'];
             
             // Criar flores caindo
             for (let i = 0; i < 35; i++) {
